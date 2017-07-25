@@ -75,7 +75,7 @@ class LinearRegressor(object):
             N = len(inds)
             A = np.hstack((measurements[inds], np.ones((N, 1))))
             b = total_rewards[inds]
-            self.p[i-1] = np.array(np.linalg.lstsq(A, b)[0])
+            self.p[i-1] = np.linalg.lstsq(A, b)[0]
 
     def predict(self, measurement):
 
