@@ -14,18 +14,18 @@ from pybrain.rl.environments.environment import Environment
 from pybrain.rl.environments import EpisodicTask
 from pybrain.rl.learners.valuebased import ActionValueNetwork, ActionValueTable
 from pybrain.rl.agents import LearningAgent
-from pybrain.rl.learners import NFQ, Q
-from pybrain.rl.experiments import EpisodicExperiment, Experiment
+from pybrain.rl.learners import NFQ
+from pybrain.rl.experiments import EpisodicExperiment
 from pybrain.rl.explorers import EpsilonGreedyExplorer 
 
 from sklearn.decomposition import PCA
 
 
 class Action(IntEnum):
-    UP = 1
-    DOWN = 2
-    LEFT = 3
-    RIGHT = 4
+    UP = 0
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
 '''
 This class specifies the behaviour of the environment (the grid).  
 '''
@@ -58,13 +58,13 @@ class NavigationEnv(Environment):
             
         """
         #moving the agent with respect to the action   
-        if action+1 == Action.UP:
+        if action == Action.UP:
             self.position = (self.position[0], self.position[1] - 1)
-        elif action+1 == Action.DOWN:
+        elif action == Action.DOWN:
             self.position = (self.position[0], self.position[1] + 1)
-        elif action+1 == Action.LEFT:
+        elif action == Action.LEFT:
             self.position = (self.position[0] - 1, self.position[1])
-        elif action+1 == Action.RIGHT:
+        elif action == Action.RIGHT:
             self.position = (self.position[0] + 1, self.position[1])
    
         #if the agent has reached the boundary of the grid, it cannot move further    
@@ -131,7 +131,7 @@ class NavigationTask(EpisodicTask):
         
 #----------------------------------------------------------------------------------        
 '''
-Here we initialize oor problem and create the environment
+Here we initialize our problem and create the environment
 '''
 #set the size of the grid
 width = 10
